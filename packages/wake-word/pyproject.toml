@@ -1,0 +1,9 @@
+[project]
+name = "wake-word"
+version = "0.0.0"
+description = "Micro wake word detection for SHARD"
+requires-python = ">=3.12"
+dependencies = [
+    "pymicro-wakeword",
+    "sounddevice"
+]

@@ -5,3 +5,8 @@ uv = "latest"
 
 [tasks.bootstrap]
 description = "Install project dependencies"
+run = "uv sync --directory packages/wake-word"
+
+[tasks.wakeword]
+description = "Run live wake word detection test"
+run = "cd packages/wake-word && uv run python run.py"
