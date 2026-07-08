@@ -1,0 +1,3 @@
+[tasks.bootstrap]
+description = "Install project dependencies"
+run = "brew bundle"

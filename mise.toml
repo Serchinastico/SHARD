@@ -1,3 +1,5 @@
+monorepo_root = true
+
 [tools]
 node = "22"
 python = "3.12"
@@ -7,18 +9,22 @@ uv = "latest"
 NATS_URL = "nats://localhost:4222"
 NATS_HOST_PORT = "4222"
 
-# Project wise
+[monorepo]
+config_roots = [
+    "packages/*"
+]
+
 [tasks.bootstrap]
 description = "Install project dependencies"
-run = "uv sync --directory packages/wake-word"
+run = "mise //packages/...:bootstrap"
 
 [tasks.codecheck]
 description = "Run all code checks"
-depends = ["wakeword-codecheck"]
+run = "mise //packages/...:codecheck"
 
 [tasks.format]
 description = "Run formatting"
-depends = ["wakeword-format"]
+run = "mise //packages/...:format"
 
 # NATS
 [tasks.nats-start]
@@ -35,17 +41,3 @@ run = "docker compose --profile ${usage_profile?} -f docker-compose/nats.yaml up
 [tasks.nats-stop]
 description = "Stops the NATS server"
 run = "docker compose -f docker-compose/nats.yaml down"
-
-# wake-word
-[tasks.wakeword-start]
-depends = ["nats-start"]
-description = "Run live wake word detection test"
-run = "cd packages/wake-word && uv run python src/main.py"
-
-[tasks.wakeword-codecheck]
-description = "Run all code checks for wakeword"
-run = "cd packages/wake-word && uv run ruff check . && uv run ruff format --check ."
-
-[tasks.wakeword-format]
-description = "Run formatting for wakeword"
-run = "cd packages/wake-word && uv run ruff check --fix . && uv run ruff format ."

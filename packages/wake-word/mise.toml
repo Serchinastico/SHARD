@@ -1,0 +1,15 @@
+[tasks.bootstrap]
+description = "Install project dependencies"
+run = "uv sync"
+
+[tasks.start]
+description = "Run live wake word detection test"
+run = "uv run python src/main.py"
+
+[tasks.codecheck]
+description = "Run all code checks for wakeword"
+run = "uv run ruff check . && uv run ruff format --check ."
+
+[tasks.format]
+description = "Run formatting for wakeword"
+run = "uv run ruff check --fix . && uv run ruff format ."
