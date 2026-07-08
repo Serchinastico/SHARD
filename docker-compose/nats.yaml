@@ -1,0 +1,18 @@
+name: shard-nats
+
+services:
+  # NATS server - https://docs.nats.io/running-a-nats-service/nats_docker/nats-docker-tutorial
+  nats:
+    image: nats:latest
+    ports:
+      - "${NATS_HOST_PORT:-4222}:4222"
+      - "8222:8222" # Monitoring
+    command: ["-m", "8222"]
+
+  nats-box:
+    image: natsio/nats-box:latest
+    profiles:
+      - debug
+    depends_on:
+      - nats
+    entrypoint: ["sleep", "infinity"]
