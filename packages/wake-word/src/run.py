@@ -1,7 +1,7 @@
 from pymicro_wakeword import MicroWakeWord, MicroWakeWordFeatures, Model
 import sounddevice as sd
 
-mww = MicroWakeWord.from_builtin(Model.ALEXA)
+mww = MicroWakeWord.from_config("resources/shard.json")
 mww_features = MicroWakeWordFeatures()
 
 stream = sd.InputStream(samplerate=16000, channels=1, dtype="int16")

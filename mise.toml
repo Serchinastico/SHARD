@@ -9,4 +9,4 @@ run = "uv sync --directory packages/wake-word"
 
 [tasks.wakeword]
 description = "Run live wake word detection test"
-run = "cd packages/wake-word && uv run python run.py"
+run = "cd packages/wake-word && uv run python src/run.py"
