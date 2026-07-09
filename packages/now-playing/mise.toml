@@ -1,3 +1,15 @@
 [tasks.bootstrap]
 description = "Install project dependencies"
 run = "brew bundle"
+
+[tasks.start]
+description = "Starts the now-playing service"
+run = "npm run start"
+
+[tasks.codecheck]
+description = "Run all code checks for now-playing"
+run = "npm run lint && npm run fmt:check"
+
+[tasks.format]
+description = "Run formatting for now-playing"
+run = "npm run lint:fix && npm run fmt"
